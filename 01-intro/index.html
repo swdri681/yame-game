@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>훈댕의 자기소개</title>
+  <style>
+    :root {
+      --배경색: #c7b994;
+      --종이색: #f4ecd8;
+      --카드색: #fbf6e9;
+      --글자색: #352f28;
+      --강조색: #a04a3a;
+      --보조색: #48645a;
+      --테두리색: #51483c;
+      --연필선: rgba(81, 72, 60, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+      color: var(--글자색);
+      background-color: var(--배경색);
+      background-image:
+        repeating-linear-gradient(7deg, rgba(70, 55, 38, 0.035) 0 1px, transparent 1px 5px),
+        radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.28), transparent 24%),
+        radial-gradient(circle at 80% 70%, rgba(90, 63, 38, 0.12), transparent 28%);
+      font-family: "나눔손글씨 펜", "Nanum Pen Script", "휴먼편지체", "Segoe Print", "Malgun Gothic", cursive;
+      font-size: 1.05rem;
+      transition: background-color 0.6s ease;
+    }
+
+    .소개-상자 {
+      position: relative;
+      width: min(900px, 100%);
+      margin: 0 auto;
+      padding: 54px 48px 46px;
+      border: 1px solid #9e8e72;
+      border-radius: 2px;
+      background-color: var(--종이색);
+      background-image:
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(94, 112, 116, 0.09) 31px 32px),
+        radial-gradient(circle at 10% 25%, rgba(115, 80, 48, 0.05), transparent 20%);
+      box-shadow: 0 3px 7px rgba(52, 42, 30, 0.3), 0 18px 45px rgba(52, 42, 30, 0.22);
+      transform: rotate(-0.2deg);
+    }
+
+    .소개-상자::before,
+    .소개-상자::after {
+      position: absolute;
+      top: -14px;
+      width: 110px;
+      height: 34px;
+      background: rgba(215, 196, 151, 0.72);
+      box-shadow: 0 1px 2px rgba(70, 50, 30, 0.15);
+      content: "";
+    }
+
+    .소개-상자::before {
+      left: 8%;
+      transform: rotate(-5deg);
+    }
+
+    .소개-상자::after {
+      right: 8%;
+      transform: rotate(4deg);
+    }
+
+    .소개-머리말 {
+      position: relative;
+      z-index: 0;
+      margin: -16px -20px 28px;
+      padding: 62px 64px 70px;
+      animation: 종이-등장 0.8s ease-out both;
+      isolation: isolate;
+    }
+
+    .소개-머리말::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: url("images/torn-paper-transparent.png") center / 100% 100% no-repeat;
+      content: "";
+      filter: drop-shadow(4px 8px 8px rgba(55, 42, 29, 0.2));
+    }
+
+    .가상-표시 {
+      display: inline-block;
+      margin: 0 0 18px;
+      padding: 8px 14px 6px;
+      border: 1px solid var(--테두리색);
+      border-radius: 1px;
+      color: var(--글자색);
+      background: #dfd2ab;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transform: rotate(-1.5deg);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 4.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+      text-shadow: 1px 1px 0 rgba(53, 47, 40, 0.12);
+    }
+
+    h1 span {
+      color: var(--강조색);
+      border-bottom: 3px double var(--강조색);
+    }
+
+    .한줄-소개 {
+      position: relative;
+      margin: 28px 0 42px;
+      padding: 20px 24px;
+      border: 1px solid var(--연필선);
+      border-radius: 1px;
+      background: #f6e8b9;
+      box-shadow: 3px 4px 8px rgba(67, 52, 35, 0.16);
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 600;
+      line-height: 1.7;
+      transform: rotate(0.5deg);
+    }
+
+    .한줄-소개::after {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 82px;
+      height: 22px;
+      background: rgba(220, 201, 157, 0.72);
+      content: "";
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+      text-decoration: underline;
+      text-decoration-color: var(--연필선);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 7px;
+    }
+
+    .취향-목록 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 0 0 38px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .취향-카드 {
+      min-height: 210px;
+      padding: 24px 20px;
+      border: 1px solid var(--연필선);
+      border-radius: 1px;
+      background: var(--카드색);
+      box-shadow: 3px 5px 9px rgba(67, 52, 35, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .취향-카드:nth-child(1) {
+      transform: rotate(-1.2deg);
+    }
+
+    .취향-카드:nth-child(2) {
+      transform: rotate(0.8deg);
+      background: #f3e7c9;
+    }
+
+    .취향-카드:nth-child(3) {
+      transform: rotate(-0.4deg);
+    }
+
+    .취향-카드:hover {
+      transform: translateY(-4px) rotate(0deg);
+      box-shadow: 5px 9px 14px rgba(67, 52, 35, 0.22);
+    }
+
+    .취향-사진 {
+      display: block;
+      width: calc(100% + 40px);
+      height: 150px;
+      margin: -24px -20px 18px;
+      border-bottom: 1px solid var(--연필선);
+      object-fit: cover;
+      filter: saturate(0.82) contrast(0.94) sepia(0.08);
+    }
+
+    .취향-카드 strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--강조색);
+      font-size: 1.25rem;
+    }
+
+    .취향-카드 p {
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .추가-취향 {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 0 0 38px;
+      padding: 22px 24px;
+      border: 1px dashed var(--테두리색);
+      border-radius: 1px;
+      background: #e8ddc2;
+      box-shadow: 3px 5px 9px rgba(67, 52, 35, 0.16);
+      transform: rotate(0.4deg);
+    }
+
+    .추가-취향-아이콘 {
+      flex: 0 0 auto;
+      font-size: 2.6rem;
+    }
+
+    .추가-취향 h2 {
+      margin: 0 0 7px;
+      font-size: 1.25rem;
+    }
+
+    .추가-취향 p {
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .요리-메모 {
+      position: relative;
+      margin: 0 0 38px;
+      padding: 28px 26px 24px 58px;
+      border: 1px solid var(--연필선);
+      border-radius: 1px;
+      background-color: #f8f1dc;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0 31px,
+        rgba(88, 122, 147, 0.18) 31px 32px
+      );
+      box-shadow: 3px 5px 9px rgba(67, 52, 35, 0.16);
+      transform: rotate(-0.3deg);
+    }
+
+    .요리-메모::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 38px;
+      width: 1px;
+      background: rgba(168, 75, 65, 0.45);
+      content: "";
+    }
+
+    .요리-메모 h2 {
+      margin-bottom: 10px;
+    }
+
+    .요리-메모 p {
+      margin: 0;
+      line-height: 2;
+    }
+
+    .요리-메모 strong {
+      color: var(--강조색);
+    }
+
+    .경험-영역 {
+      margin: 0 0 38px;
+      padding: 26px 24px;
+      border: 1px solid var(--연필선);
+      border-radius: 1px;
+      background: rgba(232, 222, 195, 0.72);
+      box-shadow: inset 0 0 24px rgba(94, 72, 45, 0.07);
+    }
+
+    .경험-영역 h2 {
+      margin-bottom: 8px;
+    }
+
+    .경험-요약 {
+      margin: 0 0 22px;
+      line-height: 1.65;
+    }
+
+    .경험-목록 {
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .경험-항목 {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 0;
+      border-bottom: 1px dashed var(--연필선);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .경험-항목:last-child {
+      border-bottom: 0;
+    }
+
+    .경험-아이콘 {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .경험-항목 strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--보조색);
+    }
+
+    .경험-항목 p {
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .색상-버튼 {
+      width: 100%;
+      padding: 17px 24px;
+      border: 2px solid #3f3a32;
+      border-radius: 2px;
+      color: #f8f1df;
+      background: #665d4f;
+      box-shadow: inset 0 0 0 2px #8a806f, 3px 4px 0 #3f3a32;
+      font: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+
+    .색상-버튼:hover {
+      background: #534b40;
+    }
+
+    .색상-버튼:active {
+      box-shadow: inset 0 0 0 2px #8a806f, 1px 1px 0 #3f3a32;
+      transform: translate(3px, 3px);
+    }
+
+    .색상-버튼:focus-visible {
+      outline: 4px solid #72aaff;
+      outline-offset: 4px;
+    }
+
+    .끝인사 {
+      margin: 26px 0 0;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .취향-목록,
+    .추가-취향,
+    .요리-메모,
+    .경험-영역,
+    .색상-버튼,
+    .끝인사 {
+      animation: 내용-등장 0.65s ease-out both;
+    }
+
+    .취향-목록 { animation-delay: 0.15s; }
+    .추가-취향 { animation-delay: 0.25s; }
+    .요리-메모 { animation-delay: 0.35s; }
+    .경험-영역 { animation-delay: 0.45s; }
+    .색상-버튼 { animation-delay: 0.55s; }
+    .끝인사 { animation-delay: 0.65s; }
+
+    @keyframes 종이-등장 {
+      from {
+        opacity: 0;
+        translate: 0 -16px;
+        rotate: -1deg;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+        rotate: 0deg;
+      }
+    }
+
+    @keyframes 내용-등장 {
+      from {
+        opacity: 0;
+        translate: 0 18px;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        padding: 20px 14px 30px;
+      }
+
+      .소개-상자 {
+        padding: 38px 20px 28px;
+        box-shadow: 0 3px 7px rgba(52, 42, 30, 0.3), 0 12px 28px rgba(52, 42, 30, 0.2);
+        transform: none;
+      }
+
+      .소개-머리말 {
+        margin: -8px -14px 20px;
+        padding: 48px 34px 52px;
+      }
+
+      .취향-목록 {
+        grid-template-columns: 1fr;
+      }
+
+      .취향-카드 {
+        min-height: auto;
+      }
+
+      .추가-취향 {
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .요리-메모 {
+        padding-right: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="소개-상자">
+    <div class="소개-머리말">
+      <p class="가상-표시">수업을 위해 만든 가상 인물이에요</p>
+
+      <h1>안녕하세요,<br><span>훈댕</span>이에요!</h1>
+
+      <p class="한줄-소개">
+        재미있는 이야기와 유쾌한 웃음을 좋아하는 30대 교육생입니다.
+        우리 함께 편안하고 즐겁게 배워요!
+      </p>
+    </div>
+
+    <section aria-labelledby="좋아하는-것-제목">
+      <h2 id="좋아하는-것-제목">제가 좋아하는 것 3가지</h2>
+
+      <ul class="취향-목록">
+        <li class="취향-카드">
+          <img class="취향-사진" src="images/broadcast-mood.png" alt="햇살이 드는 오래된 책상 위의 빈티지 마이크와 헤드폰">
+          <strong>침착맨</strong>
+          <p>편안한 말투와 예상하지 못한 엉뚱한 이야기를 들으며 웃는 것을 좋아해요.</p>
+        </li>
+        <li class="취향-카드">
+          <img class="취향-사진" src="images/manga-reading.png" alt="다다미 위에 펼쳐진 만화책과 따뜻한 차 한 잔">
+          <strong>일본 만화</strong>
+          <p>새로운 세계와 개성 있는 인물을 만나는 재미 때문에 자주 찾아봐요.</p>
+        </li>
+        <li class="취향-카드">
+          <img class="취향-사진" src="images/family-comedy-mood.png" alt="햇살 아래 크레용 가족 그림과 노란 모자가 놓인 책상">
+          <strong>짱구</strong>
+          <p>장난기 가득한 일상 속에서도 따뜻한 가족 이야기가 담겨 있어 좋아해요.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="추가-취향" aria-labelledby="또다른-취향-제목">
+      <span class="추가-취향-아이콘" aria-hidden="true">🍶</span>
+      <div>
+        <h2 id="또다른-취향-제목">또 하나의 취향</h2>
+        <p>
+          술에 담긴 다양한 맛과 이야기를 알아가는 것도 좋아해요.
+          정기 구독으로 새로운 종류를 하나씩 만나며 천천히 취향을 넓히고 있어요.
+        </p>
+      </div>
+    </section>
+
+    <section class="요리-메모" aria-labelledby="요리-취향-제목">
+      <h2 id="요리-취향-제목">🍳 요리 수첩 속 한 줄</h2>
+      <p>
+        재료를 다듬고 새로운 맛을 만들어 가는 <strong>요리하는 시간</strong>을 좋아해요.
+        직접 만든 음식은 물론, 맛있는 음식을 찾아 천천히 즐기는 것도 큰 행복이에요.
+      </p>
+    </section>
+
+    <section class="경험-영역" aria-labelledby="일본-경험-제목">
+      <h2 id="일본-경험-제목">도쿄에서 보낸 시간</h2>
+      <p class="경험-요약">
+        대학생 때 시작된 일본 생활은 취업 경험으로 이어졌어요.
+        도쿄에서 약 4년을 지내며 새로운 환경에 적응하는 힘을 길렀습니다.
+      </p>
+
+      <ol class="경험-목록">
+        <li class="경험-항목">
+          <span class="경험-아이콘" aria-hidden="true">🎓</span>
+          <div>
+            <strong>대학생 시절</strong>
+            <p>일본으로 교환학생을 다녀오며 현지 생활을 처음 경험했어요.</p>
+          </div>
+        </li>
+        <li class="경험-항목">
+          <span class="경험-아이콘" aria-hidden="true">💼</span>
+          <div>
+            <strong>일본 직장 생활 2년</strong>
+            <p>일본에서 취업해 동료들과 일하며 다양한 업무 문화를 배웠어요.</p>
+          </div>
+        </li>
+        <li class="경험-항목">
+          <span class="경험-아이콘" aria-hidden="true">🗼</span>
+          <div>
+            <strong>도쿄 거주 약 4년</strong>
+            <p>공부와 직장 생활을 포함해 도쿄에서 모두 약 4년을 살았어요.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <button class="색상-버튼" id="색상-버튼" type="button">
+      배경색 바꾸기
+    </button>
+
+    <p class="끝인사">좋아하는 만화가 있다면 먼저 말 걸어 주세요! 👋</p>
+  </main>
+
+  <script>
+    // 오래된 종이와 천을 떠올리게 하는 차분한 배경색입니다.
+    const 배경색목록 = ["#c7b994", "#9eac9c", "#b2a895", "#9ca6aa", "#b89f91"];
+    const 색상버튼 = document.querySelector("#색상-버튼");
+    let 현재색상번호 = 0;
+
+    색상버튼.addEventListener("click", function () {
+      현재색상번호 = (현재색상번호 + 1) % 배경색목록.length;
+      document.body.style.backgroundColor = 배경색목록[현재색상번호];
+    });
+  </script>
+</body>
+</html>

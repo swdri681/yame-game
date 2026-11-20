@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비밀 오락 관리부: 벽돌 미로</title><link rel="stylesheet" href="brick_game.css"><link rel="stylesheet" href="brick_theme.css">
+</head>
+<body>
+<main class="cabinet">
+  <header><div class="tape"></div><p>제7 비밀 오락 관리부</p><h1>벽돌 미로 <small>오류 회수 작전</small></h1><b class="stamp">대외비</b></header>
+  <section id="screen" class="screen">
+    <div class="scan"></div>
+    <div class="status">
+      <div>관리 구역<strong id="stageText">01 / 07</strong></div><div>업무 점수<strong id="scoreText">000000</strong></div>
+      <div>보안 등급<strong id="livesText">■ ■ ■</strong></div><div>남은 오류<strong id="remainingText">000</strong></div>
+    </div>
+    <div id="stageLights" class="lights"></div>
+    <div class="mission-bar"><span>지원 효과: <b id="effectText">없음</b></span><span>현장 요청: <b id="questText">NPC를 만나세요</b></span></div>
+    <div class="field">
+      <canvas id="gameCanvas" width="684" height="468">게임 화면을 표시할 수 없습니다.</canvas>
+      <div id="messagePanel" class="message">
+        <p>기밀 업무 지령서</p><h2 id="messageTitle">관리 요원 접속 대기</h2>
+        <div class="crew" aria-hidden="true"><i class="crew-a"></i><i class="crew-b"></i><i class="crew-c"></i><i class="crew-d"></i></div>
+        <p id="messageBody">빨간 벽돌 데이터를 모두 회수하고<br>회색 오류 추적자를 피하세요.</p>
+        <em>방향키: 이동</em><strong id="startGuide" class="start-button">스페이스키를 눌러 임무 시작</strong>
+      </div>
+      <p id="notice" class="notice" aria-live="polite"></p>
+    </div>
+    <p class="terminal"><span>시스템: <b id="systemStatus">접속 대기</b></span><span>요원 코드: 벽돌-07</span></p>
+  </section>
+  <footer><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 요원 이동　<kbd>스페이스</kbd> 임무 시작 <span>※ 오류를 남김없이 회수하십시오.</span></footer>
+</main>
+<script src="brick_game.js"></script><script src="brick_features.js"></script>
+</body></html>

@@ -1,0 +1,36 @@
+# 비밀값과 로컬 환경 설정
+.env
+.env.*
+!.env.example
+
+# 파이썬 가상환경
+.venv/
+venv/
+env/
+ENV/
+
+# 파이썬 캐시와 테스트 결과
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# 빌드 및 배포 결과
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# 편집기와 운영체제 임시 파일
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+~$*
+*.log
+
